@@ -1,8 +1,0 @@
-".\Objects\STARTUP.obj",
-".\Objects\MAIN.obj",
-".\Objects\lcd.obj",
-".\Objects\DHT11.obj",
-".\Objects\Gas.obj",
-".\Objects\STEP.obj" 
-TO ".\Objects\Detection" 
-PRINT(".\Listings\Detection.m51") RAMSIZE(256) 
