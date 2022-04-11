@@ -1,0 +1,76 @@
+C51 COMPILER V9.60.0.0   STEP                                                              04/11/2022 18:05:20 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE STEP
+OBJECT MODULE PLACED IN .\Objects\STEP.obj
+COMPILER INVOKED BY: D:\Code\ARM\C51\BIN\C51.EXE HA\STEP\STEP.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\HA;.\HA\DHT11;.\HA\LCD
+                    -;.\HA\ADC;.\HA\STEP) DEBUG OBJECTEXTEND PRINT(.\Listings\STEP.lst) TABS(2) OBJECT(.\Objects\STEP.obj)
+
+line level    source
+
+   1          
+   2          
+   3          #include "STEP.h"
+   4          
+   5          unsigned char  code table[]={0xf1,0xf3,0xf2,0xf6,0xf4,0xfc,0xf8,0xf9};
+   6          unsigned char  code table1[]={0xf9,0xf8,0xfc,0xf4,0xf6,0xf2,0xf3,0xf1};
+   7          
+   8          int a;
+   9          unsigned char k,i;
+  10          
+  11          void delay(unsigned char z)
+  12          {
+  13   1        unsigned char x,y;
+  14   1        for(x=z;x>0;x--)
+  15   1          for(y=120;y>0;y--);
+  16   1      }
+  17          
+  18          void Go_Step()
+  19          {
+  20   1      
+  21   1          for(a=0;a<520;a++)
+  22   1        {
+  23   2            for(i=0;i<8;i++)
+  24   2            {
+  25   3              P1=table[i];
+  26   3              
+  27   3              delay(1);
+  28   3              
+  29   3            }
+  30   2            
+  31   2        }
+  32   1        P1=0xf1;
+  33   1      }   
+  34          
+  35          void Break_Step()
+  36          {
+  37   1        for(a=0;a<520;a++)
+  38   1        {
+  39   2          for(i=0;i<8;i++)
+  40   2          {
+  41   3            P1=table1[i];
+  42   3      
+  43   3            delay(1);
+  44   3          }
+  45   2        
+  46   2          P1=0xf1;
+  47   2        }   
+  48   1      
+  49   1      
+  50   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    140    ----
+C51 COMPILER V9.60.0.0   STEP                                                              04/11/2022 18:05:20 PAGE 2   
+
+   CONSTANT SIZE    =     16    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      4    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
