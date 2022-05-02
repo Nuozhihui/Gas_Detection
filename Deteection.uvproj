@@ -324,7 +324,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>.\Library\ADC;.\Library\DHT11;.\Library\LCD;.\Library\STEP;.\Library\Show;.\Library\KEY;.\Library\MAX6675</IncludePath>
+              <IncludePath>.\Library\ADC;.\Library\DHT11;.\Library\LCD;.\Library\STEP;.\Library\Show;.\Library\KEY;.\Library\MAX6675;.\Library\SIM800C</IncludePath>
             </VariousControls>
           </C51>
           <Ax51>
@@ -420,6 +420,16 @@
               <FileName>MAX6675.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Library\MAX6675\MAX6675.c</FilePath>
+            </File>
+            <File>
+              <FileName>uart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Library\SIM800C\uart.c</FilePath>
+            </File>
+            <File>
+              <FileName>SIM800C.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Library\SIM800C\SIM800C.c</FilePath>
             </File>
           </Files>
         </Group>

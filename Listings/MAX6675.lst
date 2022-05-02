@@ -1,11 +1,11 @@
-C51 COMPILER V9.60.0.0   MAX6675                                                           05/03/2022 03:46:48 PAGE 1   
+C51 COMPILER V9.60.0.0   MAX6675                                                           05/03/2022 04:03:07 PAGE 1   
 
 
 C51 COMPILER V9.60.0.0, COMPILATION OF MODULE MAX6675
 OBJECT MODULE PLACED IN .\Objects\MAX6675.obj
 COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE Library\MAX6675\MAX6675.c COMPACT OPTIMIZE(8,SPEED) BROWSE INCDIR(.\Library
-                    -\ADC;.\Library\DHT11;.\Library\LCD;.\Library\STEP;.\Library\Show;.\Library\KEY;.\Library\MAX6675) DEBUG OBJECTEXTEND PRI
-                    -NT(.\Listings\MAX6675.lst) TABS(2) OBJECT(.\Objects\MAX6675.obj)
+                    -\ADC;.\Library\DHT11;.\Library\LCD;.\Library\STEP;.\Library\Show;.\Library\KEY;.\Library\MAX6675;.\Library\SIM800C) DEBU
+                    -G OBJECTEXTEND PRINT(.\Listings\MAX6675.lst) TABS(2) OBJECT(.\Objects\MAX6675.obj)
 
 line level    source
 
@@ -62,7 +62,7 @@ line level    source
   51          void DelayMs(unsigned int i)  //一个延时函数，这个函数在11.0592M晶振下的延时时间大概为1ms
   52          {
   53   1        unsigned int j,k;
-C51 COMPILER V9.60.0.0   MAX6675                                                           05/03/2022 03:46:48 PAGE 2   
+C51 COMPILER V9.60.0.0   MAX6675                                                           05/03/2022 04:03:07 PAGE 2   
 
   54   1      
   55   1        for(j=i; j>0; j--)

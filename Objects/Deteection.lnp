@@ -6,6 +6,8 @@
 ".\Objects\DHT11.obj",
 ".\Objects\Gas.obj",
 ".\Objects\MAX6675.obj",
+".\Objects\uart.obj",
+".\Objects\SIM800C.obj",
 ".\Objects\Show.obj" 
 TO ".\Objects\Deteection" 
 PRINT(".\Listings\Deteection.m51") RAMSIZE(256) 

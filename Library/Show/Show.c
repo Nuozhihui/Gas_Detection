@@ -4,7 +4,7 @@
 #include<intrins.h>
 #include<stdio.h>
 #include "Gas.h"
-
+#include "SIM800C.h"
 #include "MAX6675.h"
 extern unsigned char key_switch_f;
 extern unsigned char key_state;		//状态
@@ -15,6 +15,7 @@ unsigned char rec_dat_lcd0[6];
 unsigned char rec_dat_lcd1[6];
 unsigned char rec_dat_lcd2[6];
 unsigned char rec_dat_lcd3[6];
+
 
 
 sbit BEEP=P2^3;
@@ -32,6 +33,7 @@ void Show_iint()
 unsigned int Gas_val=0;
 unsigned int MAX6675_val=0;
 unsigned char Ignition_State=0;		//0:未升到指定温度		1:已到达指定温度	
+unsigned char Note_State=0;		
 //显示
 void Show()
 {
@@ -46,7 +48,7 @@ void Show()
 		sprintf(rec_dat_lcd0,"%d",	Gas_val);
 
 		DHT11_delay_ms(13);
-		LcdShowStr(6,0,"        ");
+		LcdShowStr(6,0,"           ");
 		LcdShowStr(6,0,rec_dat_lcd0);
 
 		
@@ -80,14 +82,19 @@ void Show()
 		if(MAX6675_val>80)
 		{
 			Ignition_State=1;
+			if(Note_State==0)
+//			sendMessage(phoneNumber,msg);		//发送短信
+			
+				Note_State=1;
+			}
 			
 			
-		}
+	
 		
 			if(Ignition_State==1)
 		{
 			
-			if(MAX6675_val<20)
+			if(MAX6675_val<35)
 			{
 			key_state=2;
 			key_switch_f =2;
@@ -98,3 +105,4 @@ void Show()
 		}
 	
 }
+	
