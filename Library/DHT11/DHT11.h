@@ -8,7 +8,7 @@
 sbit Temp_data=P1^4;
 
 
-void gx_date(void);
+
 
 //∂®“Â
 void DHT11_delay_us(unsigned char n);

@@ -1,6 +1,7 @@
 
-#include "REG52.h"
+
 #include <intrins.h>
+#include "Gas.h"
 
 #define AD_CH0 0x94
 #define AD_CH1 0xd4
@@ -86,4 +87,13 @@ uint ReadAD(uchar cmd)
 	CS = 1;
 	return(DAT);//返回读出数据
 			
+}
+unsigned int voltage=0;		//MQ-2
+//更新数据
+int gx_Gas()
+{
+	voltage = ReadAD(AD_CH3);	//通道0光敏cmd：0x94  通道1热敏cmd：0xd4  通道2电位器cmd：0xa4 通道3外部输入AIN3 cmd：0xe4
+	voltage = (voltage * 1.2207) /10; //  （5/4096）
+		return 	voltage;
+	
 }

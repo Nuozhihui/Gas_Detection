@@ -411,6 +411,11 @@
               <FileType>1</FileType>
               <FilePath>.\Library\DHT11\DHT11.c</FilePath>
             </File>
+            <File>
+              <FileName>Gas.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Library\ADC\Gas.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

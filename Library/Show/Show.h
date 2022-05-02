@@ -6,5 +6,6 @@
 #include<reg51.h>
 
 void Show_iint(void);
+void Show(void);
 
 #endif

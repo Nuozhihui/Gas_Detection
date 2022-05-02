@@ -1,113 +1,124 @@
-C51 COMPILER V9.60.0.0   GAS                                                               05/02/2022 17:02:23 PAGE 1   
+C51 COMPILER V9.60.0.0   GAS                                                               05/02/2022 19:07:37 PAGE 1   
 
 
 C51 COMPILER V9.60.0.0, COMPILATION OF MODULE GAS
 OBJECT MODULE PLACED IN .\Objects\Gas.obj
 COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE Library\ADC\Gas.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\Library\ADC;.\Library\D
-                    -HT11;.\Library\LCD;.\Library\STEP;.\Library\Show) DEBUG OBJECTEXTEND PRINT(.\Listings\Gas.lst) TABS(2) OBJECT(.\Objects\
-                    -Gas.obj)
+                    -HT11;.\Library\LCD;.\Library\STEP;.\Library\Show;.\Library\KEY) DEBUG OBJECTEXTEND PRINT(.\Listings\Gas.lst) TABS(2) OBJ
+                    -ECT(.\Objects\Gas.obj)
 
 line level    source
 
    1          
-   2          #include "REG52.h"
+   2          
    3          #include <intrins.h>
-   4          
-   5          #define AD_CH0 0x94
-   6          #define AD_CH1 0xd4
-   7          #define AD_CH2 0xa4
-   8          #define AD_CH3 0xe4 
-   9          //通道0光敏cmd：0x94  通道1热敏cmd：0xd4  通道2电位器cmd：0xa4 通道3外部输入AIN3 cmd：0xe4
-  10          
-  11          sbit CS = P3^7;
-  12          sbit DCLK = P2^1;
-  13          sbit DIN =  P2^0;
-  14          sbit DOUT = P2^5;
-  15          
-  16          /*====================================
-  17          使用typedef给已有数据类型取别名
-  18          ====================================*/
-  19          typedef unsigned char INT8U;
-  20          typedef unsigned char uchar;
-  21          typedef unsigned char u8;
-  22          
-  23          typedef unsigned int INT16U;
-  24          typedef unsigned int uint;
-  25          typedef unsigned int u16;
-  26          
-  27          /*====================================
-  28          函数  ：SPI_Write(uchar DAT)
-  29          参数  ：DAT需要发送的数据
-  30          返回值  ：无
-  31          描述  ：发送一个字节数据
-  32          ====================================*/
-  33          void SPI_Write(uchar DAT)
-  34          {
-  35   1        uchar i; 
-  36   1        for(i=0; i<8; i++) //分别写8次，每次写1位
-  37   1        {
-  38   2          DCLK = 0;//拉低时钟总线，允许DIN变化
-  39   2          if(DAT & 0x80)//先写数据最高位
-  40   2            DIN = 1;  //写1
-  41   2          else
-  42   2            DIN = 0;  //写0
-  43   2          DCLK = 1;   //拉高时钟，让从机读DIN
-  44   2          DAT <<= 1;    //为发送下一位左移1位
-  45   2        }
-  46   1      }
-  47          /*====================================
-  48          函数  ：ReadByte()
-  49          参数  ：无
-  50          返回值  ：返回读出的数据
-  51          描述  ：
-  52          ====================================*/
-  53          uint SPI_Read()
-C51 COMPILER V9.60.0.0   GAS                                                               05/02/2022 17:02:23 PAGE 2   
+   4          #include "Gas.h"
+   5          
+   6          #define AD_CH0 0x94
+   7          #define AD_CH1 0xd4
+   8          #define AD_CH2 0xa4
+   9          #define AD_CH3 0xe4 
+  10          //通道0光敏cmd：0x94  通道1热敏cmd：0xd4  通道2电位器cmd：0xa4 通道3外部输入AIN3 cmd：0xe4
+  11          
+  12          sbit CS = P3^7;
+  13          sbit DCLK = P2^1;
+  14          sbit DIN =  P2^0;
+  15          sbit DOUT = P2^5;
+  16          
+  17          /*====================================
+  18          使用typedef给已有数据类型取别名
+  19          ====================================*/
+  20          typedef unsigned char INT8U;
+  21          typedef unsigned char uchar;
+  22          typedef unsigned char u8;
+  23          
+  24          typedef unsigned int INT16U;
+  25          typedef unsigned int uint;
+  26          typedef unsigned int u16;
+  27          
+  28          /*====================================
+  29          函数  ：SPI_Write(uchar DAT)
+  30          参数  ：DAT需要发送的数据
+  31          返回值  ：无
+  32          描述  ：发送一个字节数据
+  33          ====================================*/
+  34          void SPI_Write(uchar DAT)
+  35          {
+  36   1        uchar i; 
+  37   1        for(i=0; i<8; i++) //分别写8次，每次写1位
+  38   1        {
+  39   2          DCLK = 0;//拉低时钟总线，允许DIN变化
+  40   2          if(DAT & 0x80)//先写数据最高位
+  41   2            DIN = 1;  //写1
+  42   2          else
+  43   2            DIN = 0;  //写0
+  44   2          DCLK = 1;   //拉高时钟，让从机读DIN
+  45   2          DAT <<= 1;    //为发送下一位左移1位
+  46   2        }
+  47   1      }
+  48          /*====================================
+  49          函数  ：ReadByte()
+  50          参数  ：无
+  51          返回值  ：返回读出的数据
+  52          描述  ：
+  53          ====================================*/
+C51 COMPILER V9.60.0.0   GAS                                                               05/02/2022 19:07:37 PAGE 2   
 
-  54          {
-  55   1        uchar i; 
-  56   1        uint DAT;
-  57   1        for(i=0; i<12; i++)//分别读12次，每次读一位
-  58   1        {
-  59   2          DAT <<= 1; //数据左移1位，准备接收一位
-  60   2          DCLK = 1;   //拉高时钟总线，读取SDA上的数据
-  61   2          DCLK = 0;   //拉低时钟总线，允许从机控制SDA变化
-  62   2          if(DOUT)
-  63   2            DAT |= 0X01;//为1则写1，否则不行执行写1，通过左移补0
-  64   2        }
-  65   1        return(DAT); //返回读出的数据
-  66   1      }
-  67          
-  68          /*====================================
-  69          函数  ：PCF8591Read(uchar cmd)
-  70          参数  ：cmd XPT2046控制字节
-  71          返回值  ：AD转出的数字量
-  72          描述  ：读指定通道的输入的模拟量专为数字量
-  73          ====================================*/
-  74          uint ReadAD(uchar cmd)
-  75          {
-  76   1        uint DAT;
-  77   1        CS = 0;
-  78   1        SPI_Write(cmd);
-  79   1        DCLK = 0;   //拉低时钟总线
-  80   1        _nop_();
+  54          uint SPI_Read()
+  55          {
+  56   1        uchar i; 
+  57   1        uint DAT;
+  58   1        for(i=0; i<12; i++)//分别读12次，每次读一位
+  59   1        {
+  60   2          DAT <<= 1; //数据左移1位，准备接收一位
+  61   2          DCLK = 1;   //拉高时钟总线，读取SDA上的数据
+  62   2          DCLK = 0;   //拉低时钟总线，允许从机控制SDA变化
+  63   2          if(DOUT)
+  64   2            DAT |= 0X01;//为1则写1，否则不行执行写1，通过左移补0
+  65   2        }
+  66   1        return(DAT); //返回读出的数据
+  67   1      }
+  68          
+  69          /*====================================
+  70          函数  ：PCF8591Read(uchar cmd)
+  71          参数  ：cmd XPT2046控制字节
+  72          返回值  ：AD转出的数字量
+  73          描述  ：读指定通道的输入的模拟量专为数字量
+  74          ====================================*/
+  75          uint ReadAD(uchar cmd)
+  76          {
+  77   1        uint DAT;
+  78   1        CS = 0;
+  79   1        SPI_Write(cmd);
+  80   1        DCLK = 0;   //拉低时钟总线
   81   1        _nop_();
   82   1        _nop_();
   83   1        _nop_();
   84   1        _nop_();
-  85   1        DAT = SPI_Read();
-  86   1        CS = 1;
-  87   1        return(DAT);//返回读出数据
-  88   1            
-  89   1      }
+  85   1        _nop_();
+  86   1        DAT = SPI_Read();
+  87   1        CS = 1;
+  88   1        return(DAT);//返回读出数据
+  89   1            
+  90   1      }
+  91          unsigned int voltage=0;   //MQ-2
+  92          //更新数据
+  93          int gx_Gas()
+  94          {
+  95   1        voltage = ReadAD(AD_CH3); //通道0光敏cmd：0x94  通道1热敏cmd：0xd4  通道2电位器cmd：0xa4 通道3外部输入AIN
+             -3 cmd：0xe4
+  96   1        voltage = (voltage * 1.2207) /10; //  （5/4096）
+  97   1          return  voltage;
+  98   1        
+  99   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =     89    ----
+   CODE SIZE        =    135    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =   ----    ----
+   DATA SIZE        =      2    ----
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.

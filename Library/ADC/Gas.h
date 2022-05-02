@@ -6,7 +6,7 @@
 #include<reg51.h>
 
 
-uint ReadAD(uchar cmd);
+int gx_Gas(void);
 
 
 #endif
