@@ -1,0 +1,1 @@
+"Library\Show\Show.c" OPTIMIZE (8,SPEED) BROWSE INCDIR(.\Library\ADC;.\Library\DHT11;.\Library\LCD;.\Library\STEP;.\Library\Show;.\Library\KEY) DEBUG OBJECTEXTEND PRINT(.\Listings\Show.lst) TABS (2) OBJECT(.\Objects\Show.obj)

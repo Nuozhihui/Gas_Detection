@@ -46,7 +46,7 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>.\Objects\</OutputDirectory>
-          <OutputName>Detection</OutputName>
+          <OutputName>Deteection</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>1</CreateHexFile>
@@ -324,7 +324,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>.\HA;.\HA\DHT11;.\HA\LCD;.\HA\ADC;.\HA\STEP</IncludePath>
+              <IncludePath>.\Library\ADC;.\Library\DHT11;.\Library\LCD;.\Library\STEP;.\Library\Show;.\Library\KEY</IncludePath>
             </VariousControls>
           </C51>
           <Ax51>
@@ -348,7 +348,7 @@
             <DataOverlaying>1</DataOverlaying>
             <OverlayString></OverlayString>
             <MiscControls></MiscControls>
-            <DisableWarningNumbers></DisableWarningNumbers>
+            <DisableWarningNumbers>16</DisableWarningNumbers>
             <LinkerCmdFile></LinkerCmdFile>
             <Assign></Assign>
             <ReserveString></ReserveString>
@@ -394,22 +394,27 @@
             <File>
               <FileName>lcd.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\HA\LCD\lcd.c</FilePath>
-            </File>
-            <File>
-              <FileName>DHT11.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\HA\DHT11\DHT11.c</FilePath>
-            </File>
-            <File>
-              <FileName>Gas.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\HA\ADC\Gas.c</FilePath>
+              <FilePath>.\Library\LCD\lcd.c</FilePath>
             </File>
             <File>
               <FileName>STEP.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\HA\STEP\STEP.c</FilePath>
+              <FilePath>.\Library\STEP\STEP.c</FilePath>
+            </File>
+            <File>
+              <FileName>KEY.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Library\KEY\KEY.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Show</GroupName>
+          <Files>
+            <File>
+              <FileName>Show.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Library\Show\Show.c</FilePath>
             </File>
           </Files>
         </Group>

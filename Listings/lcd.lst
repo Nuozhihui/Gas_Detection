@@ -1,10 +1,11 @@
-C51 COMPILER V9.60.0.0   LCD                                                               04/11/2022 17:53:45 PAGE 1   
+C51 COMPILER V9.60.0.0   LCD                                                               05/02/2022 17:54:18 PAGE 1   
 
 
 C51 COMPILER V9.60.0.0, COMPILATION OF MODULE LCD
 OBJECT MODULE PLACED IN .\Objects\lcd.obj
-COMPILER INVOKED BY: D:\Code\ARM\C51\BIN\C51.EXE HA\LCD\lcd.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\HA;.\HA\DHT11;.\HA\LCD;.
-                    -\HA\ADC;.\HA\STEP) DEBUG OBJECTEXTEND PRINT(.\Listings\lcd.lst) TABS(2) OBJECT(.\Objects\lcd.obj)
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE Library\LCD\lcd.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\Library\ADC;.\Library\D
+                    -HT11;.\Library\LCD;.\Library\STEP;.\Library\Show;.\Library\KEY) DEBUG OBJECTEXTEND PRINT(.\Listings\lcd.lst) TABS(2) OBJ
+                    -ECT(.\Objects\lcd.obj)
 
 line level    source
 
@@ -61,9 +62,9 @@ line level    source
   51   1          Lcd1602_Write_Cmd(addr|0x80);
   52   1      }
   53          
-  54          void LcdShowStr(unsigned char x,unsigned char y,unsigned char *str)     //ÏÔÊ¾×Ö·û´®
-C51 COMPILER V9.60.0.0   LCD                                                               04/11/2022 17:53:45 PAGE 2   
+C51 COMPILER V9.60.0.0   LCD                                                               05/02/2022 17:54:18 PAGE 2   
 
+  54          void LcdShowStr(unsigned char x,unsigned char y,unsigned char *str)     //ÏÔÊ¾×Ö·û´®
   55          {
   56   1          LcdSetCursor(x,y);      //µ±Ç°×Ö·ûµÄ×ø±ê
   57   1          while(*str != '\0')

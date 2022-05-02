@@ -5,7 +5,7 @@
 
 #include<reg51.h>
 //DHT11Òı½Å¶¨Òå
-sbit Temp_data=P3^5;
+sbit Temp_data=P1^4;
 
 
 extern unsigned int rec_dat[4];
