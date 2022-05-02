@@ -28,7 +28,7 @@ void main()
 	while(1)
 	{
 		KEY_Scanf();		//°´¼üÉ¨Ãè
-	Show();
+		Show();
 	}
 	
 	

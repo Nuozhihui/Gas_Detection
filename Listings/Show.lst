@@ -1,11 +1,11 @@
-C51 COMPILER V9.60.0.0   SHOW                                                              05/02/2022 19:18:27 PAGE 1   
+C51 COMPILER V9.60.0.0   SHOW                                                              05/03/2022 03:50:36 PAGE 1   
 
 
 C51 COMPILER V9.60.0.0, COMPILATION OF MODULE SHOW
 OBJECT MODULE PLACED IN .\Objects\Show.obj
-COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE Library\Show\Show.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\Library\ADC;.\Library
-                    -\DHT11;.\Library\LCD;.\Library\STEP;.\Library\Show;.\Library\KEY) DEBUG OBJECTEXTEND PRINT(.\Listings\Show.lst) TABS(2) 
-                    -OBJECT(.\Objects\Show.obj)
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE Library\Show\Show.c COMPACT OPTIMIZE(8,SPEED) BROWSE INCDIR(.\Library\ADC;.
+                    -\Library\DHT11;.\Library\LCD;.\Library\STEP;.\Library\Show;.\Library\KEY;.\Library\MAX6675) DEBUG OBJECTEXTEND PRINT(.\L
+                    -istings\Show.lst) TABS(2) OBJECT(.\Objects\Show.obj)
 
 line level    source
 
@@ -15,79 +15,110 @@ line level    source
    4          #include<intrins.h>
    5          #include<stdio.h>
    6          #include "Gas.h"
-   7          //----------------DHT11数据变量区-------------------------------
-   8          unsigned int rec_dat[4];
-   9          unsigned char rec_dat_lcd0[6];
-  10          unsigned char rec_dat_lcd1[6];
-  11          unsigned char rec_dat_lcd2[6];
-  12          unsigned char rec_dat_lcd3[6];
-  13          
-  14          sbit BEEP=P2^3;
-  15          //初始化
-  16          void Show_iint()
-  17          {
-  18   1        
-  19   1        InitLcd1602();            //初始化LCD
-  20   1        LcdShowStr(0,0,"GAS:"); //更新画面
-  21   1        
-  22   1        LcdShowStr(0,1,"Temp:");  //更新画面
-  23   1        
-  24   1      }
-  25          
-  26          unsigned int Gas_val=0;
-  27          //显示
-  28          void Show()
-  29          {
-  30   1        
-  31   1          Gas_val=gx_Gas();
-  32   1        
-  33   1          DHT11_delay_ms(20);
-  34   1          DHT11_receive();
-  35   1      
-  36   1        
-  37   1          //空气
-  38   1          sprintf(rec_dat_lcd0,"%d",  Gas_val);
-  39   1      
-  40   1          DHT11_delay_ms(13);
-  41   1          LcdShowStr(6,0,"        ");
-  42   1          LcdShowStr(6,0,rec_dat_lcd0);
+   7          
+   8          #include "MAX6675.h"
+   9          extern unsigned char key_switch_f;
+  10          extern unsigned char key_state;   //状态
+  11          
+  12          //----------------DHT11数据变量区-------------------------------
+  13          unsigned int rec_dat[4];
+  14          unsigned char rec_dat_lcd0[6];
+  15          unsigned char rec_dat_lcd1[6];
+  16          unsigned char rec_dat_lcd2[6];
+  17          unsigned char rec_dat_lcd3[6];
+  18          
+  19          
+  20          sbit BEEP=P2^3;
+  21          //初始化
+  22          void Show_iint()
+  23          {
+  24   1        
+  25   1        InitLcd1602();            //初始化LCD
+  26   1        LcdShowStr(0,0,"GAS:"); //更新画面
+  27   1        
+  28   1        LcdShowStr(0,1,"Temp:");  //更新画面
+  29   1        
+  30   1      }
+  31          
+  32          unsigned int Gas_val=0;
+  33          unsigned int MAX6675_val=0;
+  34          unsigned char Ignition_State=0;   //0:未升到指定温度    1:已到达指定温度  
+  35          //显示
+  36          void Show()
+  37          {
+  38   1        
+  39   1          Gas_val=gx_Gas();//热偶
+  40   1           MAX6675_val=REDE_MAX6675();  //热偶
+  41   1          DHT11_delay_ms(20);
+  42   1          DHT11_receive();
   43   1      
-  44   1      
-  45   1        
-  46   1          //温度
-  47   1          sprintf(rec_dat_lcd2,"%d",rec_dat[0]);
-  48   1          sprintf(rec_dat_lcd3,"%d",rec_dat[1]);
-  49   1          DHT11_delay_ms(13);
-  50   1          
+  44   1        
+  45   1          //空气
+  46   1          sprintf(rec_dat_lcd0,"%d",  Gas_val);
+  47   1      
+  48   1          DHT11_delay_ms(13);
+  49   1          LcdShowStr(6,0,"        ");
+  50   1          LcdShowStr(6,0,rec_dat_lcd0);
   51   1      
-  52   1      
-  53   1          LcdShowStr(6,1,rec_dat_lcd2);
-C51 COMPILER V9.60.0.0   SHOW                                                              05/02/2022 19:18:27 PAGE 2   
+  52   1          
+  53   1        
+C51 COMPILER V9.60.0.0   SHOW                                                              05/03/2022 03:50:36 PAGE 2   
 
-  54   1          LcdShowStr(8,1,".");
-  55   1          LcdShowStr(9,1,rec_dat_lcd3);
-  56   1          LcdShowStr(10,1," %");
-  57   1      
-  58   1          
-  59   1          if( Gas_val>150 || rec_dat[0]>80)
-  60   1          {
-  61   2            
-  62   2            BEEP=0;
-  63   2            
-  64   2          }else{
-  65   2            
-  66   2            BEEP=1;
-  67   2          }
-  68   1        
-  69   1      }
+  54   1          //温度
+  55   1          sprintf(rec_dat_lcd2,"%d",rec_dat[0]);
+  56   1          sprintf(rec_dat_lcd3,"%d",rec_dat[1]);
+  57   1          DHT11_delay_ms(13);
+  58   1        
+  59   1          //热偶
+  60   1          sprintf(rec_dat_lcd1,"%d",MAX6675_val);
+  61   1      
+  62   1          LcdShowStr(12,0,rec_dat_lcd1);
+  63   1          
+  64   1          LcdShowStr(6,1,rec_dat_lcd2);
+  65   1          LcdShowStr(8,1,".");
+  66   1          LcdShowStr(9,1,rec_dat_lcd3);
+  67   1          LcdShowStr(10,1," %");
+  68   1      
+  69   1          
+  70   1          if( Gas_val>150 || rec_dat[0]>80)
+  71   1          {
+  72   2            
+  73   2            BEEP=0;
+  74   2            
+  75   2          }else{
+  76   2            
+  77   2            BEEP=1;
+  78   2          }
+  79   1          
+  80   1          if(MAX6675_val>80)
+  81   1          {
+  82   2            Ignition_State=1;
+  83   2            
+  84   2            
+  85   2          }
+  86   1          
+  87   1            if(Ignition_State==1)
+  88   1          {
+  89   2            
+  90   2            if(MAX6675_val<20)
+  91   2            {
+  92   3            key_state=2;
+  93   3            key_switch_f =2;
+  94   3            Ignition_State=0;
+  95   3            
+  96   3            }
+  97   2            
+  98   2          }
+  99   1        
+ 100   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    236    ----
+   CODE SIZE        =    381    ----
    CONSTANT SIZE    =     28    ----
    XDATA SIZE       =   ----    ----
-   PDATA SIZE       =   ----    ----
-   DATA SIZE        =     34    ----
+   PDATA SIZE       =     37    ----
+   DATA SIZE        =   ----    ----
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.

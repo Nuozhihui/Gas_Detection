@@ -186,7 +186,7 @@
         </Utilities>
         <Target51>
           <Target51Misc>
-            <MemoryModel>0</MemoryModel>
+            <MemoryModel>1</MemoryModel>
             <RTOS>0</RTOS>
             <RomSize>2</RomSize>
             <DataHold>0</DataHold>
@@ -324,7 +324,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>.\Library\ADC;.\Library\DHT11;.\Library\LCD;.\Library\STEP;.\Library\Show;.\Library\KEY</IncludePath>
+              <IncludePath>.\Library\ADC;.\Library\DHT11;.\Library\LCD;.\Library\STEP;.\Library\Show;.\Library\KEY;.\Library\MAX6675</IncludePath>
             </VariousControls>
           </C51>
           <Ax51>
@@ -415,6 +415,11 @@
               <FileName>Gas.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Library\ADC\Gas.c</FilePath>
+            </File>
+            <File>
+              <FileName>MAX6675.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Library\MAX6675\MAX6675.c</FilePath>
             </File>
           </Files>
         </Group>

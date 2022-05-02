@@ -1,0 +1,109 @@
+C51 COMPILER V9.60.0.0   MAX6675                                                           05/03/2022 03:46:48 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE MAX6675
+OBJECT MODULE PLACED IN .\Objects\MAX6675.obj
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE Library\MAX6675\MAX6675.c COMPACT OPTIMIZE(8,SPEED) BROWSE INCDIR(.\Library
+                    -\ADC;.\Library\DHT11;.\Library\LCD;.\Library\STEP;.\Library\Show;.\Library\KEY;.\Library\MAX6675) DEBUG OBJECTEXTEND PRI
+                    -NT(.\Listings\MAX6675.lst) TABS(2) OBJECT(.\Objects\MAX6675.obj)
+
+line level    source
+
+   1          
+   2          
+   3          #include "MAX6675.h"
+   4          #define uchar unsigned char
+   5          #define uint  unsigned int
+   6          
+   7          sbit  SO  = P2^4;         //P3.6口与SO相连
+   8          sbit  SCK = P2^2;         //P3.4口与SCK相连
+   9          sbit  CS  = P2^3;         //P3.5口与CS相连
+  10          
+  11          
+  12          const unsigned char DevID = 1;    //本机设备ID
+  13          unsigned char buffer;     //串口接收缓冲区
+  14          unsigned char rcv_buffer[20];
+  15          unsigned char send_buffer[20];
+  16          unsigned char flag_ok = 0;    //接收完毕的标识
+  17          unsigned int MAX6675_Temp;
+  18          unsigned char Flag_connect;
+  19          unsigned char CRCH,CRCL;
+  20          unsigned char wd[2];        //wd[]：BCD码的温度
+  21          unsigned char flag_dis;     //显示刷新的标识
+  22          
+  23          unsigned int MAX6675_ReadReg(void)
+  24          { 
+  25   1        unsigned char i;   
+  26   1        unsigned int dat;
+  27   1         
+  28   1        i   = 0;   
+  29   1        dat = 0;   
+  30   1        
+  31   1        CS  = 0; 
+  32   1        SCK = 0;     
+  33   1        
+  34   1        for(i=0; i<16; i++)   //get D15-D0 from 6675  
+  35   1        {      
+  36   2          SCK = 1;     
+  37   2          dat = dat<<1;    
+  38   2          if( SO==1 )   
+  39   2            dat = dat|0x01;   
+  40   2          SCK = 0;    
+  41   2        } 
+  42   1        CS = 1;   
+  43   1          
+  44   1        return dat;   
+  45   1      }  
+  46          /*
+  47          * 功  能：延时，若干毫秒
+  48          * 参  数：毫秒数
+  49          * 返回值：无
+  50          */
+  51          void DelayMs(unsigned int i)  //一个延时函数，这个函数在11.0592M晶振下的延时时间大概为1ms
+  52          {
+  53   1        unsigned int j,k;
+C51 COMPILER V9.60.0.0   MAX6675                                                           05/03/2022 03:46:48 PAGE 2   
+
+  54   1      
+  55   1        for(j=i; j>0; j--)
+  56   1          for(k=114; k>0; k--);
+  57   1      }
+  58          
+  59          int REDE_MAX6675()
+  60          {
+  61   1        unsigned char cnt = 11;
+  62   1        unsigned int t;
+  63   1      
+  64   1      
+  65   1          t=MAX6675_ReadReg();
+  66   1      
+  67   1            Flag_connect=t&0x04;      //读出数据的D2位是热电偶掉线标志位，该位为1表示掉线，该位为0表示连接
+  68   1            Flag_connect=Flag_connect>>2;   //MAX6675是否在线
+  69   1      
+  70   1          t = t<<1;             //读出来的数据的D3~D14是温度值
+  71   1          t = t>>4;
+  72   1          MAX6675_Temp = t/4;       //测得的温度单位是0.25，所以要乘以0.25（即除以4）才能得到以度为单位的温度值
+  73   1          
+  74   1      //    for(t=0; t<200; t++)      //显示温度
+  75   1      //    {  
+  76   1      //      Display(MAX6675_Temp);
+  77   1      //    }
+  78   1      
+  79   1        return MAX6675_Temp;
+  80   1        
+  81   1      }
+  82           
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    130    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =     51       1
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
