@@ -1,9 +1,17 @@
 #include<reg51.h>
-
+#include<intrins.h>
+#include<stdio.h>
+#include<lcd.h>
 #include "DHT11.h"
 
 
 
+//----------------DHT11数据变量区-------------------------------
+unsigned int rec_dat[4];
+unsigned char rec_dat_lcd0[6];
+unsigned char rec_dat_lcd1[6];
+unsigned char rec_dat_lcd2[6];
+unsigned char rec_dat_lcd3[6];
 
 //DHT11起始信号
 
@@ -103,4 +111,25 @@ void DHT11_delay_ms(unsigned int z)
    unsigned int i,j;
    for(i=z;i>0;i--)
       for(j=110;j>0;j--);
+}
+
+
+//DHT11 数据更新
+void gx_date()
+{
+		DHT11_delay_ms(20);
+		DHT11_receive();
+
+
+		//温度
+		sprintf(rec_dat_lcd0,"%d",rec_dat[0]);
+		sprintf(rec_dat_lcd1,"%d",rec_dat[1]);
+		DHT11_delay_ms(13);
+		
+		LcdShowStr(6,1,rec_dat_lcd0);
+		LcdShowStr(8,1,".");
+		LcdShowStr(9,1,rec_dat_lcd1);
+		LcdShowStr(10,1," %");
+		
+	
 }

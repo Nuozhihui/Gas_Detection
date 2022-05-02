@@ -2,7 +2,7 @@
 #include "STEP.h"
 #include "KEY.h"
 #include "Show.h"
-
+#include "HDT11.h"
 extern void KEY_Scanf(void);
 
 
@@ -28,7 +28,7 @@ void main()
 	while(1)
 	{
 		KEY_Scanf();		//°´¼üÉ¨Ãè
-
+		gx_date();
 	}
 	
 	

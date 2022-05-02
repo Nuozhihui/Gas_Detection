@@ -8,14 +8,7 @@
 sbit Temp_data=P1^4;
 
 
-extern unsigned int rec_dat[4];
-//unsigned char data_byte;
-//unsigned char rec_dat_lcd=[4];
-extern unsigned char rec_dat_lcd0[6];
-extern unsigned char rec_dat_lcd1[6];
-extern unsigned char rec_dat_lcd2[6];
-extern unsigned char rec_dat_lcd3[6];
-
+void gx_date(void);
 
 //∂®“Â
 void DHT11_delay_us(unsigned char n);

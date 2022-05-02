@@ -1,10 +1,11 @@
 #include "KEY.h"
 #include "STEP.h"
 
-
+sbit OPEN_LED=P1^5;
+sbit OFF_LED=P1^6;
 //变量
 unsigned char key_switch_f=0;
-
+unsigned char key_state=1;		//状态
 //中断
 void IINT_INT()
 {
@@ -40,16 +41,35 @@ void exint1() interrupt 2           //(location at 0013H)
 }
 void KEY_Scanf()
 {
+
+	//打开阀门
+	if(key_state==1)
+		{
+			OFF_LED=0;
+			OPEN_LED=1;
+			if( key_switch_f ==1)
+			{
+		
+			Go_Step();
+			key_state=2;
+			 key_switch_f=0;
+			}
+		}
 	
-	if( key_switch_f ==1)
-	{
-		Go_Step();
-		 key_switch_f=0;
-	}
+
+	//关闭阀门
+	if(key_state==2)
+		{
+		OFF_LED=1;
+		OPEN_LED=0;
 		if( key_switch_f ==2)
-	{
-		Break_Step();
-		 key_switch_f=0;
+		{
+		
+			Break_Step();
+			key_state=1;
+			key_switch_f=0;
+		}
+	}
+
 	}
 	
-}

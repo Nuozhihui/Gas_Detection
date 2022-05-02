@@ -406,6 +406,11 @@
               <FileType>1</FileType>
               <FilePath>.\Library\KEY\KEY.c</FilePath>
             </File>
+            <File>
+              <FileName>DHT11.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Library\DHT11\DHT11.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
