@@ -1,1 +1,0 @@
-"Library\KEY\KEY.c" COMPACT OPTIMIZE (8,SPEED) BROWSE INCDIR(.\Library\ADC;.\Library\DHT11;.\Library\LCD;.\Library\STEP;.\Library\Show;.\Library\KEY;.\Library\MAX6675;.\Library\SIM800C) DEBUG OBJECTEXTEND PRINT(.\Listings\KEY.lst) TABS (2) OBJECT(.\Objects\KEY.obj)

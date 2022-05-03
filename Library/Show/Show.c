@@ -9,6 +9,11 @@
 extern unsigned char key_switch_f;
 extern unsigned char key_state;		//状态
 
+
+char phoneNumber[] = "17865677883";		//替换成需要被拨打电话的号码
+char msg[] = "Gas flameout hazard warning";		//短信内容	
+
+
 //----------------DHT11数据变量区-------------------------------
 unsigned int rec_dat[4];
 unsigned char rec_dat_lcd0[6];
@@ -34,6 +39,10 @@ unsigned int Gas_val=0;
 unsigned int MAX6675_val=0;
 unsigned char Ignition_State=0;		//0:未升到指定温度		1:已到达指定温度	
 unsigned char Note_State=0;		
+
+unsigned char Temperature_gas_State=0;		//
+
+
 //显示
 void Show()
 {
@@ -71,11 +80,18 @@ void Show()
 		
 		if(	Gas_val>150 || rec_dat[0]>80)
 		{
+			if(Temperature_gas_State==0)
+			{
+				key_state=2;
+				key_switch_f =2;
+				BEEP=0;
+				Temperature_gas_State=1;
+			}
 			
-			BEEP=0;
+			
 			
 		}else{
-			
+			Temperature_gas_State=0;
 			BEEP=1;
 		}
 		
@@ -83,9 +99,11 @@ void Show()
 		{
 			Ignition_State=1;
 			if(Note_State==0)
-//			sendMessage(phoneNumber,msg);		//发送短信
+			{
+		//				sendMessage(phoneNumber,msg);		//发送短信
 			
 				Note_State=1;
+			}
 			}
 			
 			

@@ -5,8 +5,10 @@
 sbit OPEN_LED=P1^5;
 sbit OFF_LED=P1^6;
 
-char phoneNumber[] = "17865677883";		//替换成需要被拨打电话的号码
-char msg[] = "Gas flameout hazard warning";		//短信内容	
+
+
+char phoneNumberg[] = "17865677883";		//替换成需要被拨打电话的号码
+char msgg[] = "Gas flameout hazard warning";		//短信内容	
 
 //变量
 unsigned char key_switch_f=0;
@@ -55,14 +57,15 @@ void KEY_Scanf()
 			OPEN_LED=1;
 			if( key_switch_f ==1)
 			{
-		sendMessage(phoneNumber,msg);		//发送短信
+	
 			Go_Step();
 			key_state=2;
 			 key_switch_f=0;
 			}
 		}
 	
-
+		
+		
 	//关闭阀门
 	if(key_state==2)
 		{

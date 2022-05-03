@@ -82,7 +82,7 @@ void errorLog()
 	{
 	  	if (sendCommand("AT\r\n", "OK\r\n", 100, 10) == Success)
 		{
-			soft_reset();
+		soft_reset();
 		}
 		delay_ms(200);
 	}

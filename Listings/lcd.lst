@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.0.0   LCD                                                               05/03/2022 04:03:06 PAGE 1   
+C51 COMPILER V9.60.0.0   LCD                                                               05/03/2022 23:46:36 PAGE 1   
 
 
 C51 COMPILER V9.60.0.0, COMPILATION OF MODULE LCD
@@ -62,7 +62,7 @@ line level    source
   51   1          Lcd1602_Write_Cmd(addr|0x80);
   52   1      }
   53          
-C51 COMPILER V9.60.0.0   LCD                                                               05/03/2022 04:03:06 PAGE 2   
+C51 COMPILER V9.60.0.0   LCD                                                               05/03/2022 23:46:36 PAGE 2   
 
   54          void LcdShowStr(unsigned char x,unsigned char y,unsigned char *str)     //ÏÔÊ¾×Ö·û´®
   55          {

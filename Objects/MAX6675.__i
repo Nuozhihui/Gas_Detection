@@ -1,1 +1,0 @@
-"Library\MAX6675\MAX6675.c" COMPACT OPTIMIZE (8,SPEED) BROWSE INCDIR(.\Library\ADC;.\Library\DHT11;.\Library\LCD;.\Library\STEP;.\Library\Show;.\Library\KEY;.\Library\MAX6675;.\Library\SIM800C) DEBUG OBJECTEXTEND PRINT(.\Listings\MAX6675.lst) TABS (2) OBJECT(.\Objects\MAX6675.obj)

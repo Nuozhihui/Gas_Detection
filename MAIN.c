@@ -3,6 +3,7 @@
 #include "KEY.h"
 #include "Show.h"
 #include "SIM800C.h"
+#include "uart.h"
 
 extern void KEY_Scanf(void);
 
@@ -12,13 +13,14 @@ extern void KEY_Scanf(void);
 //配置初始化
 void Pio_Iint()
 {
+		Uart_Init()	;				  
 	KEY_Inint();
 	Show_iint();		//1902
-
+			   
 	LcdShowStr(0,0,"SIM is loading..");     //显示字符串
 	SIM_Iint();
 	
-		Lcd1602_Write_Cmd(0x01);    //清屏  
+	Lcd1602_Write_Cmd(0x01);    //清屏  
 	
 	LcdShowStr(0,0,"GAS:");	//更新画面
 	
