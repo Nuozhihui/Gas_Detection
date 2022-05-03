@@ -85,6 +85,7 @@ void Show()
 				key_state=2;
 				key_switch_f =2;
 				BEEP=0;
+				sendMessage(phoneNumber,msg);		//发送短信
 				Temperature_gas_State=1;
 			}
 			
@@ -98,13 +99,7 @@ void Show()
 		if(MAX6675_val>80)
 		{
 			Ignition_State=1;
-			if(Note_State==0)
-			{
-		//				sendMessage(phoneNumber,msg);		//发送短信
-			
-				Note_State=1;
-			}
-			}
+		
 			
 			
 	
@@ -117,10 +112,11 @@ void Show()
 			key_state=2;
 			key_switch_f =2;
 			Ignition_State=0;
+			sendMessage(phoneNumber,msg);		//发送短信
 			
 			}
 			
 		}
 	
 }
-	
+}

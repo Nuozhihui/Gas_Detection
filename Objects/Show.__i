@@ -1,0 +1,1 @@
+"Library\Show\Show.c" COMPACT OPTIMIZE (8,SPEED) BROWSE INCDIR(.\Library\ADC;.\Library\DHT11;.\Library\LCD;.\Library\STEP;.\Library\Show;.\Library\KEY;.\Library\MAX6675;.\Library\SIM800C) DEBUG OBJECTEXTEND PRINT(.\Listings\Show.lst) TABS (2) OBJECT(.\Objects\Show.obj)
