@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.0.0   KEY                                                               05/03/2022 23:46:36 PAGE 1   
+C51 COMPILER V9.60.0.0   KEY                                                               05/04/2022 16:55:24 PAGE 1   
 
 
 C51 COMPILER V9.60.0.0, COMPILATION OF MODULE KEY
@@ -62,7 +62,7 @@ line level    source
   51   1      
   52   1        //´ò¿ª·§ÃÅ
   53   1        if(key_state==1)
-C51 COMPILER V9.60.0.0   KEY                                                               05/03/2022 23:46:36 PAGE 2   
+C51 COMPILER V9.60.0.0   KEY                                                               05/04/2022 16:55:24 PAGE 2   
 
   54   1          {
   55   2            

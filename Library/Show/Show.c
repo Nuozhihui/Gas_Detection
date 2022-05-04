@@ -23,7 +23,7 @@ unsigned char rec_dat_lcd3[6];
 
 
 
-sbit BEEP=P2^3;
+sbit BEEP=P2^7;
 //≥ı ºªØ
 void Show_iint()
 {
@@ -100,7 +100,7 @@ void Show()
 		{
 			Ignition_State=1;
 		
-			
+		}
 			
 	
 		
@@ -118,5 +118,4 @@ void Show()
 			
 		}
 	
-}
 }

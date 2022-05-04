@@ -6,7 +6,7 @@
 
 sbit  SO  = P2^4;  				//P3.6口与SO相连
 sbit  SCK = P2^2; 				//P3.4口与SCK相连
-sbit  CS  = P1^7;  				//P3.5口与CS相连
+sbit  CS  = P2^3;  				//P3.5口与CS相连
 
 
 const unsigned char DevID = 1;		//本机设备ID

@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.0.0   MAX6675                                                           05/03/2022 23:46:36 PAGE 1   
+C51 COMPILER V9.60.0.0   MAX6675                                                           05/04/2022 10:06:53 PAGE 1   
 
 
 C51 COMPILER V9.60.0.0, COMPILATION OF MODULE MAX6675
@@ -17,7 +17,7 @@ line level    source
    6          
    7          sbit  SO  = P2^4;         //P3.6口与SO相连
    8          sbit  SCK = P2^2;         //P3.4口与SCK相连
-   9          sbit  CS  = P1^7;         //P3.5口与CS相连
+   9          sbit  CS  = P2^3;         //P3.5口与CS相连
   10          
   11          
   12          const unsigned char DevID = 1;    //本机设备ID
@@ -62,7 +62,7 @@ line level    source
   51          void DelayMs(unsigned int i)  //一个延时函数，这个函数在11.0592M晶振下的延时时间大概为1ms
   52          {
   53   1        unsigned int j,k;
-C51 COMPILER V9.60.0.0   MAX6675                                                           05/03/2022 23:46:36 PAGE 2   
+C51 COMPILER V9.60.0.0   MAX6675                                                           05/04/2022 10:06:53 PAGE 2   
 
   54   1      
   55   1        for(j=i; j>0; j--)
